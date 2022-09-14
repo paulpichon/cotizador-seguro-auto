@@ -40,10 +40,40 @@ UI.prototype.llenarOpciones = () => {
 
 //instanciar UI
 const ui = new UI();
-console.log( ui );
+
 //eventlistener
 document.addEventListener('DOMContentLoaded', () => {
     //llamar funcion para llenar select con los años
     ui.llenarOpciones();
-
 });
+
+//validar el formulario
+eventListeners()
+function eventListeners() {
+    //variable del formulario
+    const formulario = document.querySelector('#cotizar-seguro');
+    //agregar ventlistener
+    formulario.addEventListener('submit', cotizarSeguro);
+}
+//function pára cotizar el seguro
+function cotizarSeguro( e ) {
+    //prevenir la accion por defecto
+    e.preventDefault();
+    
+    //leer la marca seleccionada
+    const marca = document.querySelector('#marca').value;
+    //leer el año seleccionado
+    const year = document.querySelector('#marca').year;
+    //leer el tipo de seguro
+    //al ser un radio button se lee con sintaxis de selector css
+    const tipo = document.querySelector('input[name="tipo"]:checked').value;
+
+    //validar 
+    //en caso de que los 3 campos esten vacios
+    if ( marca === '' || year === '' || tipo === '') {
+        console.log("no paso la validacion");
+    }else{
+        console.log("paso la validacion");
+    }
+
+}
