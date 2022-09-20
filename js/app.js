@@ -37,6 +37,37 @@ UI.prototype.llenarOpciones = () => {
 
     }
 }
+//agregar otro prototype
+//muestra alertas en pantalla
+//al no usar la palabra reservada THIS podemos usar arrow functions
+//toma 2 parametros: mensaje ---> sera el mensaje que saldra en pantalla, y el tipo de mensaje ---> que sera
+//el que muestre si es un error o es correcto
+UI.prototype.mostrarMensaje = ( mensaje, tipo ) => {
+    //variable del formulario
+    const formulario = document.querySelector('#cotizar-seguro');
+    //crear el html del mensaje
+    const div = document.createElement('div');
+    //verificar que tipo de mensaje sera el que se muestre en pantalla
+    if ( tipo === 'error') {
+        //añadimos clases de error
+        div.classList.add('error');
+    }else{
+        //en caso de que sea mensaje de exito 
+        div.classList.add('correcto');
+    }
+    //se añade clase mensaje
+    div.classList.add('mensaje', 'mt-10');
+    //textcontent
+    div.textContent = mensaje;
+    //insertar en el html
+    //insertBefore('no que se a creado ó nuevo nodo', 'y en donde lo quieres renderizar')
+    formulario.insertBefore( div, document.querySelector('#resultado'));
+    //quitar el mensaje de eror despues de 3 segundos
+    setTimeout(() => {
+        //removemos el div
+        div.remove();
+    }, 3000);
+}
 
 //instanciar UI
 const ui = new UI();
@@ -71,9 +102,14 @@ function cotizarSeguro( e ) {
     //validar 
     //en caso de que los 3 campos esten vacios
     if ( marca === '' || year === '' || tipo === '') {
-        console.log("no paso la validacion");
-    }else{
-        console.log("paso la validacion");
+        //mostrar mensaje de error
+        //toma 2 argumentos
+        //mensaje, tipo de mensaje
+        ui.mostrarMensaje('Todos los campos son obligatorios','error' );
+        //retornamos para que no siga ejecutando codigo
+        return;
     }
+    //en caso de pasar validacion mostrar mensaje de exito, cotizando
+    ui.mostrarMensaje('Cotizando...','exito' );
 
 }
