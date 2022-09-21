@@ -62,7 +62,7 @@ UI.prototype.mostrarMensaje = ( mensaje, tipo ) => {
     //insertar en el html
     //insertBefore('no que se a creado ó nuevo nodo', 'y en donde lo quieres renderizar')
     formulario.insertBefore( div, document.querySelector('#resultado'));
-    //quitar el mensaje de eror despues de 3 segundos
+    //quitar el mensaje de error despues de 3 segundos
     setTimeout(() => {
         //removemos el div
         div.remove();
