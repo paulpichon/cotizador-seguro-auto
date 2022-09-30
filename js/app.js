@@ -10,6 +10,60 @@ function Seguro( marca, year, tipo) {
     this.year = year;
     this.tipo =tipo;
 }
+//realiza la cotizacion con los datos
+//no usamos arrow functions ya que si haremos uso de la propiedades 
+Seguro.prototype.cotizarSeguro = function() {
+    /*  incrementos %(porcentajes)
+        1.- Americano = 1.15
+        2.- Asiatico = 1.05
+        3.- Europeo = 1.35
+    */
+    
+    //definir variables
+    let cantidad;
+    const base = 2000;
+
+    //evaluar marca de auto
+    //1 americano
+    //2 asiatico
+    //3 europeo
+    switch ( this.marca ) {
+        case '1':
+            cantidad = base * 1.15;
+            break;
+        case '2':
+            cantidad = base * 1.05;
+            break;
+        case '3':
+            cantidad = base * 1.35;
+            break;
+        default:
+            break;
+    }
+
+    //leer el año 
+    //este es la formula para poder calcular los años a partir del año actual menos el año seleccionado
+    const diferencia = new Date().getFullYear() - this.year;
+    //cada año que la diferencia es mayor, el costo va a reducirse un 3%
+    cantidad -= ((diferencia * 3) * cantidad) / 100;
+    
+    /*
+        si el seguro es basico se multiplica por un 30% más 
+        si el seguro es completo se multiplica por un 50% más 
+    */
+   if ( this.tipo === 'basico') {
+        cantidad *= 1.30;
+   }else{
+        cantidad *= 1.50;
+   }
+
+   //retornamos la cantidad
+   console.log( cantidad );
+   return cantidad;
+    
+    console.log( cantidad );
+}
+
 //objeto interfaz de usuario
 function UI() {
     //poe le momento vacio
@@ -94,7 +148,7 @@ function cotizarSeguro( e ) {
     //leer la marca seleccionada
     const marca = document.querySelector('#marca').value;
     //leer el año seleccionado
-    const year = document.querySelector('#marca').year;
+    const year = document.querySelector('#year').value;
     //leer el tipo de seguro
     //al ser un radio button se lee con sintaxis de selector css
     const tipo = document.querySelector('input[name="tipo"]:checked').value;
@@ -111,5 +165,8 @@ function cotizarSeguro( e ) {
     }
     //en caso de pasar validacion mostrar mensaje de exito, cotizando
     ui.mostrarMensaje('Cotizando...','exito' );
-
+    //instanciar el seguro
+    const seguro = new Seguro( marca, year, tipo );
+    //llamando funcion
+    seguro.cotizarSeguro();
 }
