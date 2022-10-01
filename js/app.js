@@ -1,5 +1,5 @@
 //161.- PRIMEROS PASOS Y PRIMER PROTOTYPE
-
+//30/09/2022
 //CONSTRUCTORES
 //formulario 
 //marca de auto
@@ -11,7 +11,7 @@ function Seguro( marca, year, tipo) {
     this.tipo =tipo;
 }
 //realiza la cotizacion con los datos
-//no usamos arrow functions ya que si haremos uso de la propiedades 
+//no usamos arrow functions ya que si haremos uso de la propiedades THIS
 Seguro.prototype.cotizarSeguro = function() {
     /*  incrementos %(porcentajes)
         1.- Americano = 1.15
