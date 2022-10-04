@@ -122,6 +122,10 @@ UI.prototype.mostrarMensaje = ( mensaje, tipo ) => {
         div.remove();
     }, 3000);
 }
+//prototype que mostrara el resultado
+UI.prototype.mostrarResultado = ( seguro, total ) => {
+    //crear el resultado
+}
 
 //instanciar UI
 const ui = new UI();
@@ -168,5 +172,7 @@ function cotizarSeguro( e ) {
     //instanciar el seguro
     const seguro = new Seguro( marca, year, tipo );
     //llamando funcion
-    seguro.cotizarSeguro();
+    const total = seguro.cotizarSeguro();
+    //utilizar el prototype que va a cotizar
+    ui.mostrarResultado( total, seguro );
 }
