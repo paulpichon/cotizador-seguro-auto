@@ -123,8 +123,31 @@ UI.prototype.mostrarMensaje = ( mensaje, tipo ) => {
     }, 3000);
 }
 //prototype que mostrara el resultado
-UI.prototype.mostrarResultado = ( seguro, total ) => {
+UI.prototype.mostrarResultado = ( total, seguro ) => {
     //crear el resultado
+    const div = document.createElement('div');
+    //añadir clase
+    div.classList.add('mt-10');
+    //añadir texto
+    div.innerHTML =`
+        <p class="header">Tu resumen: </p>
+        <p class="font-bold">Total: ${ total } </p>
+    `;
+    //variable para renderizar
+    const resultadoDiv = document.querySelector('#resultado');
+    
+
+    //mostrar el spinner
+    const spinner = document.querySelector('#cargando');
+    spinner.style.display = 'block';
+    //quitar spinner despues de 3 segundos
+    setTimeout(() => {
+        //quitar el spineer
+        spinner.style.display = 'none';//se quita spinner
+        //renderizar
+        resultadoDiv.appendChild( div );//se muestra el resultado
+    }, 3000);
+
 }
 
 //instanciar UI
