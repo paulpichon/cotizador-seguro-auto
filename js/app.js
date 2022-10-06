@@ -1,5 +1,5 @@
 //161.- PRIMEROS PASOS Y PRIMER PROTOTYPE
-//03/10/2022
+//04/10/2022 terminado
 //CONSTRUCTORES
 //formulario 
 //marca de auto
@@ -124,6 +124,23 @@ UI.prototype.mostrarMensaje = ( mensaje, tipo ) => {
 }
 //prototype que mostrara el resultado
 UI.prototype.mostrarResultado = ( total, seguro ) => {
+    //destructurig
+    const { marca, year, tipo } = seguro;
+    //con un switch vamos a evaluar el tipo de marca que es 1= americano, 2= asiatico, 3 = europeo
+    switch ( marca ) {
+        case '1':
+            textoMarca = 'Americano';
+            break;
+        case '2':
+            textoMarca = 'Asiatico';
+            break;
+        case '3':
+            textoMarca = 'Europeo';
+            break;
+        default:
+            break;
+    }
+
     //crear el resultado
     const div = document.createElement('div');
     //añadir clase
@@ -131,7 +148,10 @@ UI.prototype.mostrarResultado = ( total, seguro ) => {
     //añadir texto
     div.innerHTML =`
         <p class="header">Tu resumen: </p>
-        <p class="font-bold">Total: ${ total } </p>
+        <p class="font-bold">Marca: <span class="font-normal"> ${ textoMarca }</span> </p>
+        <p class="font-bold">Año: <span class="font-normal"> ${ year }</span> </p>
+        <p class="font-bold">Tipo de seguro: <span class="font-normal capitalize"> ${ tipo }</span> </p>
+        <p class="font-bold">Total: <span class="font-normal">$ ${ total }</span> </p>
     `;
     //variable para renderizar
     const resultadoDiv = document.querySelector('#resultado');
@@ -192,6 +212,15 @@ function cotizarSeguro( e ) {
     }
     //en caso de pasar validacion mostrar mensaje de exito, cotizando
     ui.mostrarMensaje('Cotizando...','exito' );
+
+    //ocultar las cotizaciones previas antes de hacer una nueva cotizacion
+    const resultados = document.querySelector('#resultado div');
+    //verificar si esta vacio la variable resultados
+    if ( resultados != null ) {
+        //quitamos resultados en caso de haber ya hecho otra cotizacion
+        resultados.remove();
+    }
+
     //instanciar el seguro
     const seguro = new Seguro( marca, year, tipo );
     //llamando funcion
