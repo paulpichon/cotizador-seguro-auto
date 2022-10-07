@@ -21,6 +21,7 @@ Seguro.prototype.cotizarSeguro = function() {
     
     //definir variables
     let cantidad;
+    //cantidad base para este ejemplo
     const base = 2000;
 
     //evaluar marca de auto
