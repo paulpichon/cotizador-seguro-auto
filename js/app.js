@@ -156,8 +156,6 @@ UI.prototype.mostrarResultado = ( total, seguro ) => {
     `;
     //variable para renderizar
     const resultadoDiv = document.querySelector('#resultado');
-    
-
     //mostrar el spinner
     const spinner = document.querySelector('#cargando');
     spinner.style.display = 'block';
@@ -166,7 +164,7 @@ UI.prototype.mostrarResultado = ( total, seguro ) => {
         //quitar el spineer
         spinner.style.display = 'none';//se quita spinner
         //renderizar
-        resultadoDiv.appendChild( div );//se muestra el resultado
+        resultadoDiv.appendChild( div );//se muestra el resultado despues de quitar el spinner
     }, 3000);
 
 }
